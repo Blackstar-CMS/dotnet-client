@@ -20,6 +20,13 @@ namespace Tests
         }
 
         [Test]
+        public void GetByTags()
+        {
+            var chunks = _client.Get.ByTags(new[] { "blackstarpedia" }).Result;
+            Assert.Greater(chunks.Count(), 2);
+        }
+
+        [Test]
         public void GetByIds()
         {
             var chunks = _client.Get.ByIds(new[] { 28,30,32 }).Result;
@@ -31,13 +38,6 @@ namespace Tests
         {
             var chunks = _client.Get.ByNames(new[] { "index-heading", "main-heading" }).Result;
             Assert.AreEqual(2, chunks.Count());
-        }
-
-        [Test]
-        public void GetByTags()
-        {
-            var chunks = _client.Get.ByTags(new[] { "blackstarpedia" }).Result;
-            Assert.Greater(chunks.Count(), 2);
         }
 
         [Test]
