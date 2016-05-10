@@ -84,7 +84,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client.cs" />
+    <Compile Include="BlackstarServerRoutes.cs" />
+    <Compile Include="ContentChunk.cs" />
+    <Compile Include="BlackstarClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
