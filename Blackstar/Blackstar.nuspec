@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://choosealicense.com/licenses/mit/</licenseUrl>
+    <projectUrl>https://github.com/Blackstar-CMS/dotnet-client/</projectUrl>
+    <iconUrl>http://blackstarcms.net/images/mac2.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>This project is the .NET client for Blackstar CMS</description>
+    <releaseNotes>First releast.</releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags>Blackstar CMS</tags>
+  </metadata>
+</package>

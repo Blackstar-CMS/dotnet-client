@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using NUnit.Framework;
 using Blackstar;
+using System;
 
 namespace Tests
 {
@@ -26,6 +27,13 @@ namespace Tests
         }
 
         [Test]
+        public void GetByTag()
+        {
+            var chunks = _client.GetByTagAsync("blackstarpedia").Result;
+            Assert.Greater(chunks.Length, 2);
+        }
+
+        [Test]
         public void GetByIds()
         {
             var chunks = _client.GetByIdsAsync(new[] { 28,30,32 }).Result;
@@ -44,6 +52,17 @@ namespace Tests
         {
             var chunks = _client.GetByIdsAsync(new[] { 98374691 }).Result;
             Assert.IsEmpty(chunks);
+        }
+
+        [Test]
+        public void WrongUrl()
+        {
+            Assert.Throws<AggregateException>(() => GetById()); 
+        }
+
+        private ContentChunk GetById() {
+            var _client = new BlackstarClient("http://wrong.blackstarcms.net");
+            return _client.GetByIdAsync(28).Result;
         }
     }
 }

@@ -44,9 +44,9 @@ namespace Blackstar
             return await FetchChunksAtAsync(_routes.GetByNames(names));
         }
 
-        public async Task<ContentChunk> GetByTagAsync(string tag)
+        public async Task<ContentChunk[]> GetByTagAsync(string tag)
         {
-            return (await GetByTagsAsync(new[] {tag})).SingleOrDefault();
+            return await GetByTagsAsync(new[] {tag});
         }
 
         public async Task<ContentChunk[]> GetByTagsAsync(IEnumerable<string> tags)
