@@ -9,8 +9,9 @@ namespace Blackstar
         public string[] Tags { get; private set; }
         public string Name { get; private set; }
         public string Value { get; private set; }
+        public string Html { get; private set; }
 
-        public ContentChunk(int id, string[] tags, string name, string value)
+        public ContentChunk(int id, string[] tags, string name, string value, string html = "")
         {
             if (id < 0) throw new ArgumentException("id must be 0 or greater");
             if (tags == null) throw new ArgumentException("Tags is required");
@@ -22,6 +23,7 @@ namespace Blackstar
             Tags = tags;
             Name = name;
             Value = value;
+            Html = html;
         }
     }
 }
