@@ -1,16 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blackstar", "Blackstar\Blackstar.csproj", "{2F01B19A-23AC-4BF9-9A0A-BF956EE755CD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{54BD1C97-0E63-4E37-ABEF-7D5122F485AC}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7C1EA835-CAC6-4836-8554-E631FDED6563}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution", "solution", "{7C1EA835-CAC6-4836-8554-E631FDED6563}"
 	ProjectSection(SolutionItems) = preProject
+		appveyor.yml = appveyor.yml
+		Build.ps1 = Build.ps1
+		global.json = global.json
 		readme.md = readme.md
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4923F4FA-8DE0-4706-8123-6E92D6C53475}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{3B1087D8-BC35-41AA-B663-C3B8D80663CA}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Blackstar", "src\Blackstar\Blackstar.xproj", "{35666B95-47AD-443C-ADAB-B6F96BBC6527}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Blackstar.Tests", "test\Blackstar.Tests\Blackstar.Tests.xproj", "{16949AC6-D552-4C8A-BE67-5FF2A7465D44}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,16 +25,20 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2F01B19A-23AC-4BF9-9A0A-BF956EE755CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2F01B19A-23AC-4BF9-9A0A-BF956EE755CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2F01B19A-23AC-4BF9-9A0A-BF956EE755CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2F01B19A-23AC-4BF9-9A0A-BF956EE755CD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{54BD1C97-0E63-4E37-ABEF-7D5122F485AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{54BD1C97-0E63-4E37-ABEF-7D5122F485AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{54BD1C97-0E63-4E37-ABEF-7D5122F485AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{54BD1C97-0E63-4E37-ABEF-7D5122F485AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35666B95-47AD-443C-ADAB-B6F96BBC6527}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35666B95-47AD-443C-ADAB-B6F96BBC6527}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35666B95-47AD-443C-ADAB-B6F96BBC6527}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35666B95-47AD-443C-ADAB-B6F96BBC6527}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16949AC6-D552-4C8A-BE67-5FF2A7465D44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16949AC6-D552-4C8A-BE67-5FF2A7465D44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16949AC6-D552-4C8A-BE67-5FF2A7465D44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16949AC6-D552-4C8A-BE67-5FF2A7465D44}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{35666B95-47AD-443C-ADAB-B6F96BBC6527} = {4923F4FA-8DE0-4706-8123-6E92D6C53475}
+		{16949AC6-D552-4C8A-BE67-5FF2A7465D44} = {3B1087D8-BC35-41AA-B663-C3B8D80663CA}
 	EndGlobalSection
 EndGlobal
