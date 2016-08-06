@@ -7,7 +7,7 @@ namespace Tests
 {
     public class ClientTests
     {
-        readonly BlackstarClient _client = new BlackstarClient("http://demo.blackstarcms.net");
+        readonly BlackstarClient _client = new BlackstarClient("http://demo.blackstarcms.net", "liam", "QaX4yGThxerOIXWSeaSM");
 
         [Fact]
         public void GetAll()

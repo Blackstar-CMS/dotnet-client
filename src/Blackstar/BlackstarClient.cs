@@ -3,7 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Blackstar
 {
@@ -12,11 +17,29 @@ namespace Blackstar
         readonly HttpClient _client;
         readonly BlackstarServerRoutes _routes;
 
-        public BlackstarClient(string serverUrl)
+        public BlackstarClient(string serverUrl, string username="", string APIKey="")
         {
             if (serverUrl == null) throw new ArgumentNullException(nameof(serverUrl));
             _routes = new BlackstarServerRoutes(new Uri(serverUrl));
             _client = new HttpClient();
+            AddTokenIfRequired(username, APIKey);
+        }
+
+        private void AddTokenIfRequired(string username, string APIKey)
+        {
+            if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(APIKey))
+            {
+                var jwt = new JwtSecurityToken(claims: new Claim[]
+                        {
+                        new Claim("name", username)
+                        },
+                        expires: DateTime.UtcNow.AddHours(24),
+                        signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(APIKey)), SecurityAlgorithms.HmacSha256));
+                var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
+                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                    "Bearer",
+                    encodedJwt);
+            }
         }
 
         public async Task<ContentChunk[]> GetAllAsync()

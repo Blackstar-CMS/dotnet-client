@@ -1,4 +1,4 @@
-﻿{
+{
   "version": "1.2.0-*",
 
   "description": "This project is the .NET client for Blackstar CMS",
@@ -16,17 +16,18 @@
   },
 
   "dependencies": {
-    "Newtonsoft.Json": "9.0.1"
+    "Newtonsoft.Json": "9.0.1",
+    "System.IdentityModel.Tokens.Jwt": "5.0.0"
   },
 
   "frameworks": {
-    "net4.0": {
+    "net4.5.1": {
       "dependencies": {
         "Microsoft.Net.Http": "2.2.29",
         "Microsoft.Bcl.Async": "1.0.168"
       }
     },
-    "netstandard1.3": {
+    "netstandard1.4": {
       "dependencies": {
         "Microsoft.CSharp": "4.0.1",
         "System.Collections": "4.0.11",
