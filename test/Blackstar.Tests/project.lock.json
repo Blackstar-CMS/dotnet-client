@@ -2636,7 +2636,7 @@
           "lib/dotnet/xunit.runner.utility.dotnet.dll": {}
         }
       },
-      "Blackstar/1.2.0": {
+      "Blackstar/1.4.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.4",
         "dependencies": {
@@ -3087,7 +3087,7 @@
           "lib/net35/xunit.runner.utility.desktop.dll": {}
         }
       },
-      "Blackstar/1.2.0": {
+      "Blackstar/1.4.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
@@ -8444,7 +8444,7 @@
         "xunit.runner.utility.nuspec"
       ]
     },
-    "Blackstar/1.2.0": {
+    "Blackstar/1.4.0": {
       "type": "project",
       "path": "../../src/Blackstar/project.json",
       "msbuildProject": "../../src/Blackstar/Blackstar.xproj"

@@ -16,30 +16,22 @@ namespace Blackstar
     {
         readonly HttpClient _client;
         readonly BlackstarServerRoutes _routes;
+        Action _addTokenIfRequired;
+        Lazy<SigningCredentials> _credentials;
 
         public BlackstarClient(string serverUrl, string username="", string APIKey="")
         {
             if (serverUrl == null) throw new ArgumentNullException(nameof(serverUrl));
             _routes = new BlackstarServerRoutes(new Uri(serverUrl));
             _client = new HttpClient();
-            AddTokenIfRequired(username, APIKey);
-        }
-
-        private void AddTokenIfRequired(string username, string APIKey)
-        {
-            if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(APIKey))
-            {
-                var jwt = new JwtSecurityToken(claims: new Claim[]
-                        {
-                        new Claim("name", username)
-                        },
-                        expires: DateTime.UtcNow.AddHours(24),
-                        signingCredentials: new SigningCredentials(new SymmetricSecurityKey(Encoding.ASCII.GetBytes(APIKey)), SecurityAlgorithms.HmacSha256));
-                var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
-                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
-                    "Bearer",
-                    encodedJwt);
-            }
+            _addTokenIfRequired = () => {
+                AddTokenIfRequired(username, APIKey);
+            };
+            _credentials = new Lazy<SigningCredentials>(() => 
+                string.IsNullOrEmpty(APIKey) ? null :
+                new SigningCredentials(
+                    new SymmetricSecurityKey(Encoding.ASCII.GetBytes(APIKey)), SecurityAlgorithms.HmacSha256));
+            _addTokenIfRequired();
         }
 
         public async Task<ContentChunk[]> GetAllAsync()
@@ -79,6 +71,7 @@ namespace Blackstar
 
         private async Task<ContentChunk[]> FetchChunksAtAsync(Uri address)
         {
+            _addTokenIfRequired();
             var response = await _client.GetAsync(address);
             if (response.IsSuccessStatusCode)
             {
@@ -87,5 +80,29 @@ namespace Blackstar
             }
             return new ContentChunk[0];
         }
+
+        /// <summary>
+        /// If a username and APIKey have been provided then create a JWT token
+        /// and include it in the Authorization header.
+        /// </summary>
+        /// <param name="username">The username to be encoded in the token and sent to the server for authorization</param>
+        /// <param name="APIKey">The API key to use</param>
+        private void AddTokenIfRequired(string username, string APIKey)
+        {
+            if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(APIKey))
+            {
+                var jwt = new JwtSecurityToken(claims: new Claim[]
+                        {
+                            new Claim("name", username)
+                        },
+                        expires: DateTime.UtcNow.AddMinutes(1),
+                        signingCredentials: _credentials.Value);
+                var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
+                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                    "Bearer",
+                    encodedJwt);
+            }
+        }
+
     }
 }
